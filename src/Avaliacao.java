@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gabrielle.ddutra
@@ -139,6 +141,11 @@ public class Avaliacao extends javax.swing.JFrame {
         txtComentario.setBounds(180, 350, 240, 90);
 
         btnEnviarAvaliacao.setText("Enviar avaliação");
+        btnEnviarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarAvaliacaoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEnviarAvaliacao);
         btnEnviarAvaliacao.setBounds(200, 460, 190, 40);
 
@@ -161,6 +168,27 @@ public class Avaliacao extends javax.swing.JFrame {
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataActionPerformed
+
+    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarAvaliacaoActionPerformed
+        // TODO add your handling code here:
+
+        String titulo = txtTitulo.getText();
+        String diretor = txtDiretor.getText();
+        String duracao = txtDuracao.getText();
+        String genero = cnbGenero.getSelectedItem().toString();
+        String data_lancamento = txtData.getText();
+        String classificacao_indicativa = cnbClassificacao.getSelectedItem().toString();
+        String cinematografia = txtCinematografia.getText();
+        String originalidade = txtOriginalidade.getText();
+        String comentario = txtComentario.getText();
+
+        try {
+            appData app = new appData();
+            app.avaliarFilme(titulo, diretor, duracao, genero, data_lancamento, classificacao_indicativa, cinematografia, originalidade, comentario);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEnviarAvaliacaoActionPerformed
 
     /**
      * @param args the command line arguments
