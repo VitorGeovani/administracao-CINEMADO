@@ -49,17 +49,23 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmEventosActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuLogin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="LOGIN"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuLoginActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuCadastro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="CADASTRO"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCadastroActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuLogin">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="LOGIN"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuCadastrar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CADASTRAR"/>
-          </Properties>
         </Menu>
       </SubComponents>
     </Menu>

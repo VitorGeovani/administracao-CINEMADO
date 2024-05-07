@@ -32,8 +32,8 @@ public class Menu extends javax.swing.JFrame {
         itmProgramacao = new javax.swing.JMenuItem();
         itmIngressos = new javax.swing.JMenuItem();
         itmEventos = new javax.swing.JMenuItem();
-        mnuLogin = new javax.swing.JMenu();
-        mnuCadastrar = new javax.swing.JMenu();
+        mnuLogin = new javax.swing.JMenuItem();
+        mnuCadastro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -81,13 +81,23 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuMenu.add(itmEventos);
 
-        jMenuBar1.add(mnuMenu);
-
         mnuLogin.setText("LOGIN");
-        jMenuBar1.add(mnuLogin);
+        mnuLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuLoginActionPerformed(evt);
+            }
+        });
+        mnuMenu.add(mnuLogin);
 
-        mnuCadastrar.setText("CADASTRAR");
-        jMenuBar1.add(mnuCadastrar);
+        mnuCadastro.setText("CADASTRO");
+        mnuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadastroActionPerformed(evt);
+            }
+        });
+        mnuMenu.add(mnuCadastro);
+
+        jMenuBar1.add(mnuMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -96,24 +106,32 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProgramacaoActionPerformed
-        
+        new Programacao().setVisible(true);
     }//GEN-LAST:event_itmProgramacaoActionPerformed
 
     private void itmSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmSubmissaoActionPerformed
-        // TODO add your handling code here:
+        new Submissao().setVisible(true);
     }//GEN-LAST:event_itmSubmissaoActionPerformed
 
     private void itmAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAvaliacaoActionPerformed
-        // TODO add your handling code here:
+        new Avaliacao().setVisible(true);
     }//GEN-LAST:event_itmAvaliacaoActionPerformed
 
     private void itmIngressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIngressosActionPerformed
-        // TODO add your handling code here:
+        new Ingressos().setVisible(true);
     }//GEN-LAST:event_itmIngressosActionPerformed
 
     private void itmEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEventosActionPerformed
-        // TODO add your handling code here:
+        new Eventos().setVisible(true);
     }//GEN-LAST:event_itmEventosActionPerformed
+
+    private void mnuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLoginActionPerformed
+        new Login().setVisible(true);
+    }//GEN-LAST:event_mnuLoginActionPerformed
+
+    private void mnuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroActionPerformed
+        new Cadastrar().setVisible(true);
+    }//GEN-LAST:event_mnuCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,8 +175,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmProgramacao;
     private javax.swing.JMenuItem itmSubmissao;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mnuCadastrar;
-    private javax.swing.JMenu mnuLogin;
+    private javax.swing.JMenuItem mnuCadastro;
+    private javax.swing.JMenuItem mnuLogin;
     private javax.swing.JMenu mnuMenu;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,7 @@
+
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -25,8 +29,6 @@ public class Cadastrar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -36,31 +38,52 @@ public class Cadastrar extends javax.swing.JFrame {
         setTitle("Cadastro de funcionário");
         getContentPane().setLayout(null);
 
-        jLabel3.setText("Nome:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 20, 110, 50);
-        getContentPane().add(txtNome);
-        txtNome.setBounds(90, 30, 250, 30);
-
         jLabel4.setText("Email:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 60, 110, 50);
+        jLabel4.setBounds(60, 40, 110, 50);
         getContentPane().add(txtEmail);
-        txtEmail.setBounds(90, 70, 250, 30);
+        txtEmail.setBounds(120, 50, 250, 30);
 
         jLabel5.setText("Senha:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 100, 110, 50);
+        jLabel5.setBounds(60, 80, 110, 50);
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(90, 110, 250, 30);
+        txtSenha.setBounds(120, 90, 250, 30);
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCadastrar);
-        btnCadastrar.setBounds(140, 160, 150, 40);
+        btnCadastrar.setBounds(170, 140, 150, 40);
 
         setSize(new java.awt.Dimension(572, 239));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        String u, s;
+        u = txtEmail.getText();
+        s = txtSenha.getText();
+        try {
+            new appData().cadastrarUsuario(u, s);
+            //avisar o user se os dados foram salvos
+            JOptionPane.showMessageDialog(null,"Usuário cadastrado com sucesso");
+            //limpar os campos
+            txtEmail.setText("");
+            txtSenha.setText("");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
+        } catch (SQLException ex) {
+            if(ex.getMessage().contains("Duplicate entry")){
+                JOptionPane.showMessageDialog(null,"Usuário ja cadastrado.");
+            } else {
+            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,11 +122,9 @@ public class Cadastrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

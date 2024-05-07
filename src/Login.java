@@ -1,3 +1,7 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -27,9 +31,9 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
+        pswSenha = new javax.swing.JPasswordField();
 
         setTitle("Login");
         getContentPane().setLayout(null);
@@ -41,18 +45,40 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Email:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(40, 70, 90, 30);
-        getContentPane().add(txtSenha);
-        txtSenha.setBounds(90, 110, 300, 30);
         getContentPane().add(txtEmail);
         txtEmail.setBounds(90, 70, 300, 30);
 
         btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEntrar);
         btnEntrar.setBounds(160, 170, 140, 40);
+        getContentPane().add(pswSenha);
+        pswSenha.setBounds(90, 110, 300, 30);
 
         setSize(new java.awt.Dimension(483, 268));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        String u, s;
+        s = txtEmail.getText();
+        u = pswSenha.getText();
+        try {
+            appData app = new appData();
+            ResultSet rs = app.entrar(s, u);
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Bem vindo!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,7 +119,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField pswSenha;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
