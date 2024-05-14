@@ -19,35 +19,26 @@ import javax.swing.table.DefaultTableModel;
 
 public class Listar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Listar
-     */
+    appData data;
+    
     public Listar() {
         initComponents();
-        carregarDados();
+        data = new appData();
+        carregarDados("Todos");
     }
 
-    private void carregarDados(){
-        try {
-            //3.1 - conectar
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema_pi","root","p@$$w0rd");
-            //3.2 - buscar os dados
-            PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes");
-            ResultSet resultado = st.executeQuery();
-            //2 - limpar a tabela
-            DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
-            model.setRowCount(0);
-            //3.3 - preencher a tabela
-            while(resultado.next()){
-                model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
-            }
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
+    private void carregarDados(String genero){
+    try {
+        DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+        model.setRowCount(0);
+        ResultSet resultado = data.listarFilmes(genero);
+        while (resultado.next()) {
+            model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
         }
+    } catch (ClassNotFoundException | SQLException ex) {
+        JOptionPane.showMessageDialog(null,"Erro ao buscar filmes: " + ex.getMessage());
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,56 +115,15 @@ public class Listar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//  GEN-FIRST:event_cmbCargo1ActionPerformed
-        String c = cmbCargo1.getSelectedItem().toString();
-
-    if(c.equals("Todos")){
-        carregarDados();
-    } else {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema_pi","root","p@$$w0rd");
-            PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
-            st.setString(1, c);
-            ResultSet resultado = st.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
-            model.setRowCount(0);
-            while(resultado.next()){
-                model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
-            }
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
-        }
-    }
-        
-    }                                         
+    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {
+        String genero = cmbCargo1.getSelectedItem().toString();
+        carregarDados(genero);
+    }                                       
     
-    private void btnListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListar1ActionPerformed
-        String c = cmbCargo1.getSelectedItem().toString();
-        
-    if(c.equals("Todos")){
-        carregarDados();
-    } else {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema_pi","root","p@$$w0rd");
-            PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
-            st.setString(1, c);
-            ResultSet resultado = st.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
-            model.setRowCount(0);
-            while(resultado.next()){
-                model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
-            }
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
-        }
+    private void btnListar1ActionPerformed(java.awt.event.ActionEvent evt) {
+        String genero = cmbCargo1.getSelectedItem().toString();
+        carregarDados(genero);
     }
-    }//GEN-LAST:event_btnListar1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -58,6 +58,15 @@ public class appData {
         st.executeUpdate();
     }
 
-    
-    
+    public ResultSet listarFilmes(String genero) throws ClassNotFoundException, SQLException{
+        conectar();
+        // 4 LISTAR FILMES
+        if(genero.equals("Todos")){
+            st = conectar.prepareStatement("SELECT * FROM filmes");
+        }else{
+            st = conectar.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
+            st.setString(1, genero);
+        }
+        return st.executeQuery();
+    }
 }
