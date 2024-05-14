@@ -16,7 +16,7 @@ duracao int,
 data_lancamento varchar(50),
 sinopse text,
 classificacao_indicativa varchar(50),
-INDEX (titulo, diretor)  -- Adicionando índice composto para as colunas titulo e diretor
+INDEX (titulo, diretor)
 );
 
 create table programacao (
@@ -28,7 +28,7 @@ fk_diretor varchar (255) not null,
 data varchar(50),
 horario varchar(50),
 local varchar(255),
-INDEX (data, horario, local), -- Adicionando índice composto para as colunas data, horario e local
+INDEX (data, horario, local),
 
 Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
 FOREIGN KEY (fk_titulo, fk_diretor) REFERENCES filmes(titulo, diretor)
