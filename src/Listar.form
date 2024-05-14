@@ -76,7 +76,7 @@
     <Component class="javax.swing.JComboBox" name="cmbCargo1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="12">
+          <StringArray count="13">
             <StringItem index="0" value="Romance"/>
             <StringItem index="1" value="Aventura"/>
             <StringItem index="2" value="Suspense"/>
@@ -89,7 +89,11 @@
             <StringItem index="9" value="Fantasia"/>
             <StringItem index="10" value="Musical"/>
             <StringItem index="11" value="Mist&#xe9;rio"/>
+            <StringItem index="12" value="Todos"/>
           </StringArray>
+        </Property>
+        <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Todos" type="code"/>
         </Property>
       </Properties>
       <Events>

@@ -24,6 +24,35 @@ public class Listar extends javax.swing.JFrame {
      */
     public Listar() {
         initComponents();
+        carregarDados();
+    }
+
+    private void carregarDados(){
+        //Carregar todos os filmes submetidos e deixar o Genero como "Todos" no combobox default
+
+        //1 - obter o cargo selecionado
+        String c = "Todos";
+
+        //3 - buscar os dados no banco de dados
+        try {
+            //3.1 - conectar
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
+            //3.2 - buscar os dados
+            PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes");
+            ResultSet resultado = st.executeQuery();
+            //2 - limpar a tabela
+            DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+            model.setRowCount(0);
+            //3.3 - preencher a tabela
+            while(resultado.next()){
+                model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
+        }
     }
 
     /**
@@ -45,7 +74,7 @@ public class Listar extends javax.swing.JFrame {
         btnListar.setText("Listar");
         btnListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
+                actionPerformed(evt);
             }
         });
 
@@ -78,7 +107,8 @@ public class Listar extends javax.swing.JFrame {
         getContentPane().add(iblCargo);
         iblCargo.setBounds(300, 40, 100, 50);
 
-        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Aventura", "Suspense", "Terror/Horror", "Ação", "Documentário", "Ficção científica", "Drama", "Comédia", "Fantasia", "Musical", "Mistério" }));
+        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Aventura", "Suspense", "Terror/Horror", "Ação", "Documentário", "Ficção científica", "Drama", "Comédia", "Fantasia", "Musical", "Mistério", "Todos" }));
+        cmbCargo1.setSelectedItem("Todos");
         cmbCargo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCargo1ActionPerformed(evt);
@@ -102,23 +132,13 @@ public class Listar extends javax.swing.JFrame {
 
     private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//  GEN-FIRST:event_cmbCargo1ActionPerformed
         // TODO add your handling code here:
-        
-        
-
-    }//GEN-LAST:event_cmbCargo1ActionPerformed
+    }                                         
     
-
-        
-    
-
     private void btnListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListar1ActionPerformed
-        // Fazer apenas a listagem dos filmes submetidos, avaliados, dos ingressos disponíveis, da programação e dos eventos. A parte de conexão com banco de dados e a busca dos dados é responsabilidade do arquivo appData.java
-
+        
         //1 - obter o cargo selecionado
         String c = cmbCargo1.getSelectedItem().toString();
-        //2 - limpar a tabela
-        DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
-        model.setRowCount(0);
+        
         //3 - buscar os dados no banco de dados
         try {
             //3.1 - conectar
@@ -128,6 +148,9 @@ public class Listar extends javax.swing.JFrame {
             PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
             st.setString(1, c);
             ResultSet resultado = st.executeQuery();
+            //2 - limpar a tabela
+            DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+            model.setRowCount(0);
             //3.3 - preencher a tabela
             while(resultado.next()){
                 model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
@@ -137,7 +160,7 @@ public class Listar extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
         }
-        
+    
 
     }//GEN-LAST:event_btnListar1ActionPerformed
 
