@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author gabrielle.ddutra
@@ -14,6 +20,22 @@ public class Avaliacao extends javax.swing.JFrame {
      */
     public Avaliacao() {
         initComponents();
+    }
+
+    public Avaliacao(String titulo, String diretor, String genero, String duracao, String data, String classificacao) {
+        initComponents();
+        txtTitulo.setText(titulo);
+        txtDiretor.setText(diretor);
+        txtDuracao.setText(duracao);
+        txtData.setText(data);
+        cnbGenero.setSelectedItem(genero);
+        cnbClassificacao.setSelectedItem(classificacao);
+        txtTitulo.setEnabled(false);
+        txtDiretor.setEnabled(false);
+        txtDuracao.setEnabled(false);
+        txtData.setEnabled(false);
+        cnbGenero.setEnabled(false);
+        cnbClassificacao.setEnabled(false);
     }
 
     /**
@@ -48,7 +70,7 @@ public class Avaliacao extends javax.swing.JFrame {
         btnEnviarAvaliacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Avalição do filme");
+        setTitle("Avaliação do filme");
         getContentPane().setLayout(null);
 
         jLabel1.setText("Duração:");
@@ -141,7 +163,12 @@ public class Avaliacao extends javax.swing.JFrame {
         btnEnviarAvaliacao.setText("Enviar avaliação");
         btnEnviarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarAvaliacaoActionPerformed(evt);
+                try {
+                    btnEnviarAvaliacaoActionPerformed(evt);
+                } catch (ClassNotFoundException | SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
         getContentPane().add(btnEnviarAvaliacao);
@@ -167,8 +194,42 @@ public class Avaliacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataActionPerformed
 
-    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarAvaliacaoActionPerformed
-        // TODO add your handling code here:
+    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {//GEN-FIRST:event_btnEnviarAvaliacaoActionPerformed
+        /* Crie a função de Avaliar Filmes considerando a estrutura das tabelas abaixo: 
+     
+            create table filmes ( 
+            id_filme int auto_increment primary key, 
+            capa varchar(255), 
+            titulo varchar(255) not null, 
+            diretor varchar(255) not null, 
+            genero varchar(100), 
+            duracao int, 
+            data_lancamento varchar(50), 
+            sinopse text, 
+            classificacao_indicativa varchar(50), 
+            INDEX (titulo, diretor) 
+        );
+
+        CREATE TABLE filmes_avaliacao (
+            id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+            fk_id_filme INT,
+            cinematografia VARCHAR(100),
+            originalidade VARCHAR(100),
+            comentario_tecnico TEXT,
+            
+            FOREIGN KEY (fk_id_filme) REFERENCES filmes(id_filme)
+        );
+
+        Ao digitar o ID de um filme já submetido,Receba e preencha automaticamente com título do filme, diretor, genero, duração, data de lançamento, sinopse e classificação indicativa, deixando-os setDisabled, Permita a adição apenas de cinematografia, originalidade e comentário técnico.
+     */
+
+        // 5 AVALIAR FILME
+        appData app = new appData();
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do filme"));
+        app.avaliarFilme(id);
+        app.submeterAvaliacao(id, txtCinematografia.getText(), txtOriginalidade.getText(), txtComentario.getText());
+        JOptionPane.showMessageDialog(null, "Avaliação enviada com sucesso!");
+        
     }//GEN-LAST:event_btnEnviarAvaliacaoActionPerformed
 
     /**
