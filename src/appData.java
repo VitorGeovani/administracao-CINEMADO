@@ -25,24 +25,39 @@ public class appData {
         conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
         
     }
-    public  void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
+    public void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
         conectar();
-        //enviar os dados para o banco
-        st = conectar.prepareStatement("INSERT INTO usuarios values(?,?)");
+        // 2 CADASTRAR USUARIO
+        st = conectar.prepareStatement("INSERT INTO usuarios(email, senha) VALUES(?,?)");
         st.setString(1, u);
         st.setString(2, s);
-        st.executeUpdate(); //salva no BD
-           
+        st.executeUpdate();
     }
     
     public ResultSet entrar(String u, String s) throws ClassNotFoundException, SQLException{
         conectar();
-         // 3 BUSCAR USER E SENHA
-         st = conectar.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
-         st.setString(1, s);
-         st.setString(2, u);
-         resultado = st.executeQuery();
+        // 1 ENTRAR
+        st = conectar.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
+        st.setString(1, u);
+        st.setString(2, s);
+        resultado = st.executeQuery();
         return resultado;
     }
+
+    public void submeterFilme(String t, String d, String dur, String g, String s, String dt, String c) throws ClassNotFoundException, SQLException{
+        conectar();
+        // 3 SUBMETER FILME
+        st = conectar.prepareStatement("INSERT INTO filmes(titulo, diretor, duracao, genero, sinopse, data_lancamento, classificacao_indicativa) VALUES(?,?,?,?,?,?,?)");
+        st.setString(1, t);
+        st.setString(2, d);
+        st.setString(3, dur);
+        st.setString(4, g);
+        st.setString(5, s);
+        st.setString(6, dt);
+        st.setString(7, c);
+        st.executeUpdate();
+    }
+
+    
     
 }

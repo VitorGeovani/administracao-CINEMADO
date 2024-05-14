@@ -3,10 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author gabrielle.ddutra
  */
+
 public class Listar extends javax.swing.JFrame {
 
     /**
@@ -90,103 +100,45 @@ public class Listar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargo1ActionPerformed
-        //1 - obter o cargo selecionado
-        String c = cmbCargo1.getSelectedItem().toString();
+    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//  GEN-FIRST:event_cmbCargo1ActionPerformed
+        // TODO add your handling code here:
+        
+        
 
-        try {
-            //2- conectar com BD
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/empresa","root","p@$$w0rd");
-            //3- Fazer busca
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuarios WHERE cargo = ?");
-            st.setString(1,c);
-            ResultSet usuarios = st.executeQuery();
-            DefaultTableModel tblModelo = (DefaultTableModel) tblUsuarios.getModel();
-            while(usuarios.next()){
-
-                Object linha[] = {
-                    usuarios.getString("usuario"),
-                    usuarios.getString("senha"),
-                    usuarios.getString("cargo")
-
-                };
-                tblModelo.addRow(linha);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Entre em contato com o adminsitrador. Erro: " + ex.getMessage());
-        }
     }//GEN-LAST:event_cmbCargo1ActionPerformed
+    
 
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        String cod;
-        cod = txtCodigo.getText();
-        if(cod.equals("")){
-            carregarDados();
-            return; //exit p/ execução
-        }
-        try{
-            //1 - canectar com banco de dados
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3307/prova","root","p@$$w0rd");
-            //buscar usuarios na tabela com o cargo = slaoq
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM curso WHERE cod_curso = ?");
-            st.setString(1, cod);
-            ResultSet curso = st.executeQuery(); //executa o comando acima
-            DefaultTableModel tblModelo = (DefaultTableModel) tblCursos.getModel();
-            tblModelo.setRowCount(0); // limpa a tela
-            //enquanto existirem linhas na tabela usuarios
-            //ele executa(usuarios aqui == variavel suas linhas acima)
-            while(curso.next()){
-
-                Object dados[] = {
-                    curso.getString("cod_curso"),
-                    curso.getString("area_curso"),
-                    curso.getString("numero_semestres"),
-                    curso.getString("nome_coordenador")
-                };
-                tblModelo.addRow(dados);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Entre em contato com o suporte e informe o erro: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_btnListarActionPerformed
+        
+    
 
     private void btnListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListar1ActionPerformed
-        String cod;
-        cod = txtCodigo.getText();
-        if(cod.equals("")){
-            carregarDados();
-            return; //exit p/ execução
-        }
-        try{
-            //1 - canectar com banco de dados
+        // Fazer apenas a listagem dos filmes submetidos, avaliados, dos ingressos disponíveis, da programação e dos eventos. A parte de conexão com banco de dados e a busca dos dados é responsabilidade do arquivo appData.java
+
+        //1 - obter o cargo selecionado
+        String c = cmbCargo1.getSelectedItem().toString();
+        //2 - limpar a tabela
+        DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+        model.setRowCount(0);
+        //3 - buscar os dados no banco de dados
+        try {
+            //3.1 - conectar
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3307/prova","root","p@$$w0rd");
-            //buscar usuarios na tabela com o cargo = slaoq
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM curso WHERE cod_curso = ?");
-            st.setString(1, cod);
-            ResultSet curso = st.executeQuery(); //executa o comando acima
-            DefaultTableModel tblModelo = (DefaultTableModel) tblCursos.getModel();
-            tblModelo.setRowCount(0); // limpa a tela
-            //enquanto existirem linhas na tabela usuarios
-            //ele executa(usuarios aqui == variavel suas linhas acima)
-            while(curso.next()){
-
-                Object dados[] = {
-                    curso.getString("cod_curso"),
-                    curso.getString("area_curso"),
-                    curso.getString("numero_semestres"),
-                    curso.getString("nome_coordenador")
-                };
-                tblModelo.addRow(dados);
+            Connection conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
+            //3.2 - buscar os dados
+            PreparedStatement st = conectar.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
+            st.setString(1, c);
+            ResultSet resultado = st.executeQuery();
+            //3.3 - preencher a tabela
+            while(resultado.next()){
+                model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
             }
-
-        } catch (ClassNotFoundException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Entre em contato com o suporte e informe o erro: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro na conexão com o Banco de dados:" + ex.getMessage());
         }
+        
+
     }//GEN-LAST:event_btnListar1ActionPerformed
 
     /**

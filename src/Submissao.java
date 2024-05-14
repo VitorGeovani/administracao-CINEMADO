@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gabrielle.ddutra
@@ -112,6 +116,11 @@ public class Submissao extends javax.swing.JFrame {
         cnbClassificacao.setBounds(190, 330, 230, 30);
 
         btnSubmeter.setText("Submeter Filme");
+        btnSubmeter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmeterActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSubmeter);
         btnSubmeter.setBounds(200, 390, 170, 40);
 
@@ -147,6 +156,38 @@ public class Submissao extends javax.swing.JFrame {
     private void cnbGeneroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cnbGeneroItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cnbGeneroItemStateChanged
+
+    private void btnSubmeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmeterActionPerformed
+        String t, d, dur, g, s, dt, c;
+        t = txtTitulo.getText();
+        d = txtDiretor.getText();
+        dur = txtDuracao.getText();
+        g = cnbGenero.getSelectedItem().toString();
+        s = txtSinpse.getText();
+        dt = txtData.getText();
+        c = cnbClassificacao.getSelectedItem().toString();
+        
+        try {
+            new appData().submeterFilme(t, d, dur, g, s, dt, c);
+
+            // Avisar quando a submissão for realizada
+            JOptionPane.showMessageDialog(null, "Filme submetido com sucesso");
+
+            // Limpar os campos
+            txtTitulo.setText("");
+            txtDiretor.setText("");
+            txtDuracao.setText("");
+            cnbGenero.setSelectedIndex(0);
+            txtSinpse.setText("");
+            txtData.setText("");
+            cnbClassificacao.setSelectedIndex(0);
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+        } catch (SQLException ex ) {
+            JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSubmeterActionPerformed
 
     /**
      * @param args the command line arguments
