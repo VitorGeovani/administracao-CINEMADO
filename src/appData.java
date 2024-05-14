@@ -22,7 +22,7 @@ public class appData {
     private void conectar() throws ClassNotFoundException, SQLException{
         // conecção com BD
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
+        conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema_pi","root","p@$$w0rd");
         
     }
     public void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
