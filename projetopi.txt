@@ -1,0 +1,124 @@
+-- ............................................................
+create table usuarios(
+id_usuario int auto_increment primary key,
+email varchar(100),
+senha varchar(100)
+);
+
+create table filmes (
+id_filme int auto_increment primary key,
+capa varchar(255),
+titulo varchar(255) not null,
+diretor varchar(255) not null,
+genero varchar(100),
+duracao int,
+data_lancamento varchar(50),
+sinopse text,
+classificacao_indicativa varchar(50),
+INDEX (titulo, diretor)  -- Adicionando índice composto para as colunas titulo e diretor
+);
+
+create table programacao (
+id_programa int auto_increment primary key,
+fk_id_filme int,
+capa varchar(255),
+fk_titulo varchar (255) not null, 
+fk_diretor varchar (255) not null,
+data varchar(50),
+horario varchar(50),
+local varchar(255),
+INDEX (data, horario, local), -- Adicionando índice composto para as colunas data, horario e local
+
+Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
+FOREIGN KEY (fk_titulo, fk_diretor) REFERENCES filmes(titulo, diretor)
+);
+
+create table eventos (
+id_evento int auto_increment primary key,
+capa varchar(255),
+nome varchar(255),
+data varchar(50),
+hora varchar(50),
+local varchar(255),
+descricao text
+);
+
+create table ingressos (
+id_ingresso int auto_increment primary key,
+fk_id_filme int,
+fk_data varchar(50),
+fk_horario varchar(50),
+fk_local varchar(255),
+vagas int,
+
+Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
+FOREIGN KEY (fk_data, fk_horario, fk_local) REFERENCES programacao(data, horario, local)
+);
+
+
+
+
+--- comando para inserir as informações da tabela filmes -----
+SELECT fa.id_avaliacao, fa.cinematografia, fa.originalidade, fa.comentario_tecnico,
+       f.titulo, f.diretor, f.genero, f.duracao, f.data_lancamento, f.classificacao_indicativa
+FROM filmes_avaliacao fa
+JOIN filmes f ON fa.fk_id_filme = f.id;
+
+
+---- codigo atualizado do sql ----
+create table usuarios(
+id_usuario int auto_increment primary key,
+email varchar(100),
+senha varchar(100)
+);
+
+create table filmes (
+id int auto_increment primary key,
+capa varchar(255),
+titulo varchar(255) not null,
+diretor varchar(255) not null,
+genero varchar(100),
+duracao int,
+data_lancamento varchar(50),
+sinopse text,
+classificacao_indicativa varchar(50)
+);
+
+CREATE TABLE filmes_avaliacao (
+    id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_filme INT,
+    cinematografia VARCHAR(100),
+    originalidade VARCHAR(100),
+    comentario_tecnico TEXT,
+    
+    FOREIGN KEY (fk_id_filme) REFERENCES filmes(id)
+);
+
+
+CREATE TABLE programacao (
+    id_programa INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_filme INT,
+    data VARCHAR(50),
+    horario VARCHAR(50),
+    local VARCHAR(255),
+    FOREIGN KEY (fk_id_filme) REFERENCES filmes(id)
+);
+
+create table eventos (
+id_evento int auto_increment primary key,
+capa varchar(255),
+nome varchar(255),
+data varchar(50),
+hora varchar(50),
+local varchar(255),
+descricao text
+);
+
+CREATE TABLE ingressos (
+    id_ingresso INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_filme int,
+    fk_id_programa INT,
+    vagas INT,
+    Foreign KEY (fk_id_filme) REFERENCES filmes(id),
+    FOREIGN KEY (fk_id_programa) REFERENCES programacao(id_programa)
+);

@@ -1,3 +1,4 @@
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -32,8 +33,10 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        btnEntrar = new javax.swing.JButton();
         pswSenha = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        btnCadastrar = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
 
         setTitle("Login");
         getContentPane().setLayout(null);
@@ -47,36 +50,55 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setBounds(40, 70, 90, 30);
         getContentPane().add(txtEmail);
         txtEmail.setBounds(90, 70, 300, 30);
+        getContentPane().add(pswSenha);
+        pswSenha.setBounds(90, 110, 300, 30);
 
-        btnEntrar.setText("Entrar");
+        jLabel3.setText("Não possui conta? ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(40, 240, 130, 40);
+
+        btnCadastrar.setText("Cadastre-se");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCadastrar);
+        btnCadastrar.setBounds(150, 250, 140, 23);
+
+        btnEntrar.setText("ENTRAR");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(160, 170, 140, 40);
-        getContentPane().add(pswSenha);
-        pswSenha.setBounds(90, 110, 300, 30);
+        btnEntrar.setBounds(160, 170, 130, 30);
 
-        setSize(new java.awt.Dimension(483, 268));
+        setSize(new java.awt.Dimension(450, 344));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        new Cadastrar().setVisible(true);
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String u, s;
-        s = txtEmail.getText();
-        u = pswSenha.getText();
+        u = txtEmail.getText();
+        s = pswSenha.getText();
         try {
-            appData app = new appData();
-            ResultSet rs = app.entrar(s, u);
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Bem vindo!");
-            }else{
-                JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");
+            ResultSet resultado = new appData().entrar(u, s);
+            if(resultado.next()){
+                new Menu().setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        } catch ( ClassNotFoundException ex){
+            JOptionPane.showMessageDialog(null, "Entre em contato com o administrador e informe o erro: "+ ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Entre em contato com o administrador e informe o erro: "+ ex.getMessage());
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -116,9 +138,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField pswSenha;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables

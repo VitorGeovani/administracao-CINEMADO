@@ -59,7 +59,7 @@ public class Cadastrar extends javax.swing.JFrame {
         getContentPane().add(btnCadastrar);
         btnCadastrar.setBounds(170, 140, 150, 40);
 
-        setSize(new java.awt.Dimension(572, 239));
+        setSize(new java.awt.Dimension(480, 239));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

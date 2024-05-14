@@ -26,28 +26,18 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        mnuMenu = new javax.swing.JMenu();
-        itmSubmissao = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         itmAvaliacao = new javax.swing.JMenuItem();
+        itmListar = new javax.swing.JMenuItem();
+        itmSubmissao = new javax.swing.JMenuItem();
         itmProgramacao = new javax.swing.JMenuItem();
         itmIngressos = new javax.swing.JMenuItem();
         itmEventos = new javax.swing.JMenuItem();
-        mnuLogin = new javax.swing.JMenuItem();
-        mnuCadastro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu");
         getContentPane().setLayout(null);
 
-        mnuMenu.setText("MENU");
-
-        itmSubmissao.setText("Submissão");
-        itmSubmissao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmSubmissaoActionPerformed(evt);
-            }
-        });
-        mnuMenu.add(itmSubmissao);
+        jMenu1.setText("MENU");
 
         itmAvaliacao.setText("Avaliação");
         itmAvaliacao.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +45,23 @@ public class Menu extends javax.swing.JFrame {
                 itmAvaliacaoActionPerformed(evt);
             }
         });
-        mnuMenu.add(itmAvaliacao);
+        jMenu1.add(itmAvaliacao);
+
+        itmListar.setText("Listar");
+        itmListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmListar);
+
+        itmSubmissao.setText("Submissão");
+        itmSubmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmSubmissaoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmSubmissao);
 
         itmProgramacao.setText("Programação");
         itmProgramacao.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +69,7 @@ public class Menu extends javax.swing.JFrame {
                 itmProgramacaoActionPerformed(evt);
             }
         });
-        mnuMenu.add(itmProgramacao);
+        jMenu1.add(itmProgramacao);
 
         itmIngressos.setText("Ingressos");
         itmIngressos.addActionListener(new java.awt.event.ActionListener() {
@@ -71,67 +77,37 @@ public class Menu extends javax.swing.JFrame {
                 itmIngressosActionPerformed(evt);
             }
         });
-        mnuMenu.add(itmIngressos);
+        jMenu1.add(itmIngressos);
 
         itmEventos.setText("Eventos");
-        itmEventos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmEventosActionPerformed(evt);
-            }
-        });
-        mnuMenu.add(itmEventos);
+        jMenu1.add(itmEventos);
 
-        mnuLogin.setText("LOGIN");
-        mnuLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuLoginActionPerformed(evt);
-            }
-        });
-        mnuMenu.add(mnuLogin);
-
-        mnuCadastro.setText("CADASTRO");
-        mnuCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCadastroActionPerformed(evt);
-            }
-        });
-        mnuMenu.add(mnuCadastro);
-
-        jMenuBar1.add(mnuMenu);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(762, 433));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void itmProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProgramacaoActionPerformed
-        new Programacao().setVisible(true);
-    }//GEN-LAST:event_itmProgramacaoActionPerformed
-
-    private void itmSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmSubmissaoActionPerformed
-        new Submissao().setVisible(true);
-    }//GEN-LAST:event_itmSubmissaoActionPerformed
 
     private void itmAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAvaliacaoActionPerformed
         new Avaliacao().setVisible(true);
     }//GEN-LAST:event_itmAvaliacaoActionPerformed
 
+    private void itmListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarActionPerformed
+        new Listar().setVisible(true);
+    }//GEN-LAST:event_itmListarActionPerformed
+
+    private void itmSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmSubmissaoActionPerformed
+        new Submissao().setVisible(true);
+    }//GEN-LAST:event_itmSubmissaoActionPerformed
+
+    private void itmProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProgramacaoActionPerformed
+        new Programacao().setVisible(true);
+    }//GEN-LAST:event_itmProgramacaoActionPerformed
+
     private void itmIngressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIngressosActionPerformed
         new Ingressos().setVisible(true);
     }//GEN-LAST:event_itmIngressosActionPerformed
-
-    private void itmEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEventosActionPerformed
-        new Eventos().setVisible(true);
-    }//GEN-LAST:event_itmEventosActionPerformed
-
-    private void mnuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLoginActionPerformed
-        new Login().setVisible(true);
-    }//GEN-LAST:event_mnuLoginActionPerformed
-
-    private void mnuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroActionPerformed
-        new Cadastrar().setVisible(true);
-    }//GEN-LAST:event_mnuCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,11 +148,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmAvaliacao;
     private javax.swing.JMenuItem itmEventos;
     private javax.swing.JMenuItem itmIngressos;
+    private javax.swing.JMenuItem itmListar;
     private javax.swing.JMenuItem itmProgramacao;
     private javax.swing.JMenuItem itmSubmissao;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mnuCadastro;
-    private javax.swing.JMenuItem mnuLogin;
-    private javax.swing.JMenu mnuMenu;
     // End of variables declaration//GEN-END:variables
 }
