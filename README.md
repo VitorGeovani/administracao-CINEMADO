@@ -55,3 +55,13 @@ vagas int,
 Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
 FOREIGN KEY (fk_data, fk_horario, fk_local) REFERENCES programacao(data, horario, local)
 );
+
+CREATE TABLE filmes_avaliacao (
+    id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_filme INT,
+    cinematografia VARCHAR(100),
+    originalidade VARCHAR(100),
+    comentario_tecnico TEXT,
+    
+    FOREIGN KEY (fk_id_filme) REFERENCES filmes(id_filme)
+);
