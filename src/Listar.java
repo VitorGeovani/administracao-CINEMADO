@@ -33,7 +33,19 @@ public class Listar extends javax.swing.JFrame {
         model.setRowCount(0);
         ResultSet resultado = data.listarFilmes(genero);
         while (resultado.next()) {
-            model.addRow(new Object[]{resultado.getInt("id_filme"), resultado.getString("titulo"), resultado.getString("genero"), resultado.getString("diretor")});
+            model.addRow(new Object[]{
+                resultado.getInt("id_filme"), 
+                resultado.getString("titulo"), 
+                resultado.getString("genero"), 
+                resultado.getString("diretor"),
+                resultado.getString("duracao"), 
+                resultado.getString("sinopse"), 
+                resultado.getString("data_lancamento"), 
+                resultado.getString("classificacao_indicativa"),
+                resultado.getString("cinematografia"), 
+                resultado.getString("originalidade"), 
+                resultado.getString("comentario_tecnico")
+            });
         }
     } catch (ClassNotFoundException | SQLException ex) {
         JOptionPane.showMessageDialog(null,"Erro ao buscar filmes: " + ex.getMessage());
@@ -72,7 +84,7 @@ public class Listar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID do filme", "Título", "Gênero", "Diretor"
+                "ID do filme", "Título", "Gênero", "Diretor", "Duração", "Sinopse", "Data de lançamento", "Classificação indicativa", "Cinematografia", "Originalidade", "Comentário Técnico"
             }
         ) {
             boolean[] canEdit = new boolean [] {

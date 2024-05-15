@@ -4,39 +4,101 @@
  */
 
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-
-
 /**
  *
  * @author gabrielle.ddutra
  */
 public class Avaliacao extends javax.swing.JFrame {
+    // Variáveis para armazenar os detalhes do filme
+    private String tituloFilme;
+    private String diretorFilme;
+    private String generoFilme;
+    private String duracaoFilme;
+    private String dataFilme;
+    private String classificacaoFilme;
+    private static int idFilme;
+
+    // Adicione essas declarações de campo à classe Avaliacao
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtClassificacao;
+
+    // Método para preencher os campos com os detalhes do filme
+    private void preencherCamposFilme() {
+        txtTitulo.setText(tituloFilme);
+        txtDiretor.setText(diretorFilme);
+        txtGenero.setText(generoFilme);
+        txtDuracao.setText(duracaoFilme);
+        txtData.setText(dataFilme);
+        txtClassificacao.setText(classificacaoFilme);
+        // Desabilitar campos de filme para edição
+        txtTitulo.setEnabled(false);
+        txtDiretor.setEnabled(false);
+        txtGenero.setEnabled(false);
+        txtDuracao.setEnabled(false);
+        txtData.setEnabled(false);
+        txtClassificacao.setEnabled(false);
+    }
 
     /**
      * Creates new form Avaliacao
      */
-    public Avaliacao() {
+    public Avaliacao(int idFilme) {
+        this.idFilme = idFilme;
         initComponents();
+        // Carregar detalhes do filme com base no ID fornecido
+        carregarDetalhesFilme();
     }
 
-    public Avaliacao(String titulo, String diretor, String genero, String duracao, String data, String classificacao) {
-        initComponents();
-        txtTitulo.setText(titulo);
-        txtDiretor.setText(diretor);
-        txtDuracao.setText(duracao);
-        txtData.setText(data);
-        cnbGenero.setSelectedItem(genero);
-        cnbClassificacao.setSelectedItem(classificacao);
-        txtTitulo.setEnabled(false);
-        txtDiretor.setEnabled(false);
-        txtDuracao.setEnabled(false);
-        txtData.setEnabled(false);
-        cnbGenero.setEnabled(false);
-        cnbClassificacao.setEnabled(false);
+    // Método para carregar os detalhes do filme com base no ID
+    private void carregarDetalhesFilme() {
+        try {
+            appData app = new appData();
+            ResultSet resultado = app.avaliarFilme(idFilme);
+            if (resultado.next()) {
+                // Extrair detalhes do filme do ResultSet
+                tituloFilme = resultado.getString("titulo");
+                diretorFilme = resultado.getString("diretor");
+                generoFilme = resultado.getString("genero");
+                duracaoFilme = resultado.getString("duracao");
+                dataFilme = resultado.getString("data_lancamento");
+                classificacaoFilme = resultado.getString("classificacao_indicativa");
+                // Preencher automaticamente os campos com os detalhes do filme
+                preencherCamposFilme();
+                // Habilitar campos de avaliação para edição
+                txtCinematografia.setEnabled(true);
+                txtOriginalidade.setEnabled(true);
+                txtComentario.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Filme não encontrado.");
+                dispose(); // Fechar a janela de avaliação se o filme não for encontrado
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar detalhes do filme: " + e.getMessage());
+            dispose(); // Fechar a janela de avaliação em caso de erro
+        }
     }
+
+    // public Avaliacao(String titulo, String diretor, String genero, String duracao, String data, String classificacao) {
+    //     initComponents();
+    //     txtTitulo.setText(titulo);
+    //     txtDiretor.setText(diretor);
+    //     txtDuracao.setText(duracao);
+    //     txtData.setText(data);
+    //     cnbGenero.setSelectedItem(genero);
+    //     cnbClassificacao.setSelectedItem(classificacao);
+    //     txtTitulo.setEnabled(false);
+    //     txtDiretor.setEnabled(false);
+    //     txtDuracao.setEnabled(false);
+    //     txtData.setEnabled(false);
+    //     cnbGenero.setEnabled(false);
+    //     cnbClassificacao.setEnabled(false);
+    // }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +130,9 @@ public class Avaliacao extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtComentario = new javax.swing.JTextField();
         btnEnviarAvaliacao = new javax.swing.JButton();
+        txtGenero = new javax.swing.JTextField();
+        txtClassificacao = new javax.swing.JTextField();
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Avaliação do filme");
@@ -194,43 +259,46 @@ public class Avaliacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataActionPerformed
 
-    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {//GEN-FIRST:event_btnEnviarAvaliacaoActionPerformed
-        /* Crie a função de Avaliar Filmes considerando a estrutura das tabelas abaixo: 
-     
-            create table filmes ( 
-            id_filme int auto_increment primary key, 
-            capa varchar(255), 
-            titulo varchar(255) not null, 
-            diretor varchar(255) not null, 
-            genero varchar(100), 
-            duracao int, 
-            data_lancamento varchar(50), 
-            sinopse text, 
-            classificacao_indicativa varchar(50), 
-            INDEX (titulo, diretor) 
-        );
-
-        CREATE TABLE filmes_avaliacao (
-            id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-            fk_id_filme INT,
-            cinematografia VARCHAR(100),
-            originalidade VARCHAR(100),
-            comentario_tecnico TEXT,
-            
-            FOREIGN KEY (fk_id_filme) REFERENCES filmes(id_filme)
-        );
-
-        Ao digitar o ID de um filme já submetido,Receba e preencha automaticamente com título do filme, diretor, genero, duração, data de lançamento, sinopse e classificação indicativa, deixando-os setDisabled, Permita a adição apenas de cinematografia, originalidade e comentário técnico.
-     */
-
-        // 5 AVALIAR FILME
-        appData app = new appData();
-        int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do filme"));
-        app.avaliarFilme(id);
-        app.submeterAvaliacao(id, txtCinematografia.getText(), txtOriginalidade.getText(), txtComentario.getText());
-        JOptionPane.showMessageDialog(null, "Avaliação enviada com sucesso!");
-        
-    }//GEN-LAST:event_btnEnviarAvaliacaoActionPerformed
+    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {
+        try {
+            // Solicitar ao usuário que insira o ID do filme
+            int idFilme = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do filme que deseja avaliar:"));
+            // Buscar detalhes do filme com base no ID fornecido
+            appData app = new appData();
+            ResultSet resultado = app.avaliarFilme(idFilme);
+            if (resultado.next()) {
+                // Extrair detalhes do filme do ResultSet
+                tituloFilme = resultado.getString("titulo");
+                diretorFilme = resultado.getString("diretor");
+                generoFilme = resultado.getString("genero");
+                duracaoFilme = resultado.getString("duracao");
+                dataFilme = resultado.getString("data_lancamento");
+                classificacaoFilme = resultado.getString("classificacao_indicativa");
+                // Preencher automaticamente os campos com os detalhes do filme
+                preencherCamposFilme();
+                // Habilitar campos de avaliação para edição
+                txtCinematografia.setEnabled(true);
+                txtOriginalidade.setEnabled(true);
+                txtComentario.setEnabled(true);
+                
+                // Capturar os valores dos campos de avaliação
+                String cinematografia = txtCinematografia.getText();
+                String originalidade = txtOriginalidade.getText();
+                String comentarioTecnico = txtComentario.getText();
+                
+                // Submeter a avaliação
+                app.submeterAvaliacao(idFilme, cinematografia, originalidade, comentarioTecnico);
+                
+                JOptionPane.showMessageDialog(null, "Avaliação enviada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Filme não encontrado.");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar detalhes do filme: " + e.getMessage());
+        }
+    }
+    
 
     /**
      * @param args the command line arguments
@@ -262,7 +330,7 @@ public class Avaliacao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Avaliacao().setVisible(true);
+                new Avaliacao(idFilme).setVisible(true);
             }
         });
     }

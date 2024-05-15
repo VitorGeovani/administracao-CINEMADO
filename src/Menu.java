@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.JOptionPane;
 /**
  *
  * @author gabrielle.ddutra
@@ -90,7 +91,18 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAvaliacaoActionPerformed
-        new Avaliacao().setVisible(true);
+        // Solicitar ao usuário que insira o ID do filme
+        String idInput = JOptionPane.showInputDialog("Digite o ID do filme que deseja avaliar:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            int idFilme = Integer.parseInt(idInput);
+            // Abrir a tela de avaliação com o ID do filme
+            new Avaliacao(idFilme).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do filme não fornecido.");
+        }
+        
+        // new Avaliacao().setVisible(true);
     }//GEN-LAST:event_itmAvaliacaoActionPerformed
 
     private void itmListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarActionPerformed
