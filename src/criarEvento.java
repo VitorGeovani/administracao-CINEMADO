@@ -3,16 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author gabrielle.ddutra
+ * @author Vitor
  */
-public class Eventos extends javax.swing.JFrame {
+public class criarEvento extends javax.swing.JFrame {
 
     /**
-     * Creates new form Eventos
+     * Creates new form criarEvento
      */
-    public Eventos() {
+    public criarEvento() {
         initComponents();
     }
 
@@ -26,42 +28,31 @@ public class Eventos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtData = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
-        btnEnviar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
+        btnCriarEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Submissão de Eventos");
         getContentPane().setLayout(null);
 
         jLabel2.setText("Nome do evento:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(90, 40, 100, 30);
-
-        jLabel4.setText("Descrição:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(90, 200, 110, 30);
-
-        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescricaoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDescricao);
-        txtDescricao.setBounds(150, 200, 300, 80);
         getContentPane().add(txtNome);
         txtNome.setBounds(190, 40, 270, 30);
 
         jLabel3.setText("Data:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(90, 80, 100, 30);
+        getContentPane().add(txtData);
+        txtData.setBounds(150, 80, 170, 30);
 
         jLabel5.setText("Hora:");
         getContentPane().add(jLabel5);
@@ -74,8 +65,6 @@ public class Eventos extends javax.swing.JFrame {
         });
         getContentPane().add(txtHora);
         txtHora.setBounds(150, 120, 170, 30);
-        getContentPane().add(txtData);
-        txtData.setBounds(150, 80, 170, 30);
 
         jLabel7.setText("Local:");
         getContentPane().add(jLabel7);
@@ -89,17 +78,30 @@ public class Eventos extends javax.swing.JFrame {
         getContentPane().add(txtLocal);
         txtLocal.setBounds(150, 160, 300, 30);
 
-        btnEnviar.setText("Enviar ");
-        getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(240, 310, 110, 40);
+        jLabel4.setText("Descrição:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(90, 200, 110, 30);
 
-        setSize(new java.awt.Dimension(718, 384));
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDescricao);
+        txtDescricao.setBounds(150, 200, 300, 80);
+
+        btnCriarEvento.setText("Criar Evento");
+        btnCriarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarEventoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCriarEvento);
+        btnCriarEvento.setBounds(240, 310, 110, 40);
+
+        setSize(new java.awt.Dimension(684, 417));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
         // TODO add your handling code here:
@@ -108,6 +110,32 @@ public class Eventos extends javax.swing.JFrame {
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
+
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
+
+    private void btnCriarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEventoActionPerformed
+        try {
+            String nome = txtNome.getText();
+            String data = txtData.getText();
+            String hora = txtHora.getText();
+            String local = txtLocal.getText();
+            String descricao = txtDescricao.getText();
+
+            appData app = new appData();
+            app.criarEvento(nome, data, hora, local, descricao);
+            JOptionPane.showMessageDialog(null, "Evento criado com sucesso!");
+
+            txtNome.setText("");
+            txtData.setText("");
+            txtHora.setText("");
+            txtLocal.setText("");
+            txtDescricao.setText("");
+        } catch (Exception e) {
+            System.out.println("Erro ao criar evento: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnCriarEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,26 +154,26 @@ public class Eventos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(criarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(criarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(criarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(criarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Eventos().setVisible(true);
+                new criarEvento().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnCriarEvento;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

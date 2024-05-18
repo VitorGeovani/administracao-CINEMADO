@@ -29,7 +29,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome evento:"/>
+        <Property name="text" type="java.lang.String" value="Nome do evento:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -60,7 +60,7 @@
     <Component class="javax.swing.JTextField" name="txtNome">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="180" y="40" width="270" height="30"/>
+          <AbsoluteConstraints x="190" y="40" width="270" height="30"/>
         </Constraint>
       </Constraints>
     </Component>

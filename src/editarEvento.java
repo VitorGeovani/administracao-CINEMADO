@@ -3,17 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.ResultSet;
+
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author gabrielle.ddutra
+ * @author Vitor
  */
-public class Eventos extends javax.swing.JFrame {
-
+public class editarEvento extends javax.swing.JFrame {
+    private int idEvento;
     /**
-     * Creates new form Eventos
+     * Creates new form editarEvento
      */
-    public Eventos() {
+    public editarEvento(int idEvento) {
+        this.idEvento = idEvento;
         initComponents();
+        carregarDados();
+    }
+
+    private void carregarDados() {
+        try {
+            appData app = new appData();
+            ResultSet rs = app.buscarEventosEditar(idEvento);
+            if (rs.next()) {
+                txtNome.setText(rs.getString("nome"));
+                txtData.setText(rs.getString("data"));
+                txtHora.setText(rs.getString("hora"));
+                txtLocal.setText(rs.getString("local"));
+                txtDescricao.setText(rs.getString("descricao"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar dados do evento: " + e.getMessage());
+        }
     }
 
     /**
@@ -26,42 +48,31 @@ public class Eventos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtData = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
-        btnEnviar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
+        btnEditarEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Submissão de Eventos");
         getContentPane().setLayout(null);
 
         jLabel2.setText("Nome do evento:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(90, 40, 100, 30);
-
-        jLabel4.setText("Descrição:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(90, 200, 110, 30);
-
-        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescricaoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDescricao);
-        txtDescricao.setBounds(150, 200, 300, 80);
         getContentPane().add(txtNome);
         txtNome.setBounds(190, 40, 270, 30);
 
         jLabel3.setText("Data:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(90, 80, 100, 30);
+        getContentPane().add(txtData);
+        txtData.setBounds(150, 80, 170, 30);
 
         jLabel5.setText("Hora:");
         getContentPane().add(jLabel5);
@@ -74,8 +85,6 @@ public class Eventos extends javax.swing.JFrame {
         });
         getContentPane().add(txtHora);
         txtHora.setBounds(150, 120, 170, 30);
-        getContentPane().add(txtData);
-        txtData.setBounds(150, 80, 170, 30);
 
         jLabel7.setText("Local:");
         getContentPane().add(jLabel7);
@@ -89,17 +98,30 @@ public class Eventos extends javax.swing.JFrame {
         getContentPane().add(txtLocal);
         txtLocal.setBounds(150, 160, 300, 30);
 
-        btnEnviar.setText("Enviar ");
-        getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(240, 310, 110, 40);
+        jLabel4.setText("Descrição:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(90, 200, 110, 30);
 
-        setSize(new java.awt.Dimension(718, 384));
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDescricao);
+        txtDescricao.setBounds(150, 200, 300, 80);
+
+        btnEditarEvento.setText("Editar Evento");
+        btnEditarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarEventoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditarEvento);
+        btnEditarEvento.setBounds(240, 310, 110, 40);
+
+        setSize(new java.awt.Dimension(590, 397));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
         // TODO add your handling code here:
@@ -108,6 +130,21 @@ public class Eventos extends javax.swing.JFrame {
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
+
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
+
+    private void btnEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEventoActionPerformed
+        try {
+            appData app = new appData();
+            app.editarEvento(idEvento, txtNome.getText(), txtData.getText(), txtHora.getText(), txtLocal.getText(), txtDescricao.getText());
+            JOptionPane.showMessageDialog(null, "Evento editado com sucesso!");
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println("Erro ao criar evento: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,26 +163,26 @@ public class Eventos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Eventos().setVisible(true);
+                new editarEvento(0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnEditarEvento;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

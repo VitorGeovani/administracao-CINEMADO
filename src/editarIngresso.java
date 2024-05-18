@@ -3,21 +3,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author gabrielle.ddutra
+ * @author Vitor
  */
-public class Programacao extends javax.swing.JFrame {
+public class editarIngresso extends javax.swing.JFrame {
+    private int idIngresso;
 
     /**
-     * Creates new form Programacao
+     * Creates new form editarIngresso
      */
-    public Programacao() {
+    public editarIngresso(int idIngresso) {
+        this.idIngresso = idIngresso;
         initComponents();
+        carregarDadosIngresso(idIngresso);
+    }
+
+    private void carregarDadosIngresso(int idIngresso) {
+        try {
+            appData app = new appData();
+            ResultSet resultado = app.buscarIngresso(idIngresso);
+            if (resultado.next()) {
+                txtTitulo.setText(resultado.getString("titulo"));
+                txtDiretor.setText(resultado.getString("diretor"));
+                txtData.setText(resultado.getString("fk_data"));
+                txtHora.setText(resultado.getString("fk_horario"));
+                txtLocal.setText(resultado.getString("fk_local"));
+                txtVagas.setText(resultado.getString("vagas"));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar ingresso: " + ex.getMessage());
+        }
     }
 
     /**
@@ -33,18 +54,17 @@ public class Programacao extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtDiretor = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtTitulo1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtData = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
-        btnEnviar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtVagas = new javax.swing.JTextField();
+        btnEditarIngresso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Submissão de sessões");
         getContentPane().setLayout(null);
 
         jLabel2.setText("Título do Filme:");
@@ -65,15 +85,11 @@ public class Programacao extends javax.swing.JFrame {
         getContentPane().add(txtDiretor);
         txtDiretor.setBounds(120, 70, 300, 30);
 
-        jLabel6.setText("Título do Filme:");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(60, 30, 100, 30);
-        getContentPane().add(txtTitulo1);
-        txtTitulo1.setBounds(150, 30, 270, 30);
-
         jLabel3.setText("Data:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(60, 110, 100, 30);
+        getContentPane().add(txtData);
+        txtData.setBounds(120, 110, 170, 30);
 
         jLabel5.setText("Hora:");
         getContentPane().add(jLabel5);
@@ -86,8 +102,6 @@ public class Programacao extends javax.swing.JFrame {
         });
         getContentPane().add(txtHora);
         txtHora.setBounds(120, 150, 170, 30);
-        getContentPane().add(txtData);
-        txtData.setBounds(120, 110, 170, 30);
 
         jLabel7.setText("Local:");
         getContentPane().add(jLabel7);
@@ -101,16 +115,28 @@ public class Programacao extends javax.swing.JFrame {
         getContentPane().add(txtLocal);
         txtLocal.setBounds(120, 190, 300, 30);
 
-        btnEnviar.setText("Enviar ");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setText("Vagas disponiveis:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(60, 230, 110, 30);
+
+        txtVagas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
+                txtVagasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(210, 240, 110, 40);
+        getContentPane().add(txtVagas);
+        txtVagas.setBounds(170, 230, 250, 30);
 
-        setSize(new java.awt.Dimension(667, 320));
+        btnEditarIngresso.setText("Editar Ingresso");
+        btnEditarIngresso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarIngressoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditarIngresso);
+        btnEditarIngresso.setBounds(210, 290, 110, 40);
+
+        setSize(new java.awt.Dimension(545, 371));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,95 +152,28 @@ public class Programacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
 
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+    private void txtVagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVagasActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_txtVagasActionPerformed
 
-        /* 
-         Banco de dados:
-
-    create table usuarios(
-    id_usuario int auto_increment primary key,
-    email varchar(100),
-    senha varchar(100)
-    );
-
-    create table filmes (
-    id_filme int auto_increment primary key,
-    capa varchar(255),
-    titulo varchar(255) not null,
-    diretor varchar(255) not null,
-    genero varchar(100),
-    duracao int,
-    data_lancamento varchar(50),
-    sinopse text,
-    classificacao_indicativa varchar(50),
-    INDEX (titulo, diretor)
-    );
-
-    create table programacao (
-    id_programa int auto_increment primary key,
-    fk_id_filme int,
-    capa varchar(255),
-    fk_titulo varchar (255) not null, 
-    fk_diretor varchar (255) not null,
-    data varchar(50),
-    horario varchar(50),
-    local varchar(255),
-    INDEX (data, horario, local),
-
-    Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
-    FOREIGN KEY (fk_titulo, fk_diretor) REFERENCES filmes(titulo, diretor)
-    );
-
-    create table eventos (
-    id_evento int auto_increment primary key,
-    capa varchar(255),
-    nome varchar(255),
-    data varchar(50),
-    hora varchar(50),
-    local varchar(255),
-    descricao text
-    );
-
-    create table ingressos (
-    id_ingresso int auto_increment primary key,
-    fk_id_filme int,
-    fk_data varchar(50),
-    fk_horario varchar(50),
-    fk_local varchar(255),
-    vagas int,
-
-    Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
-    FOREIGN KEY (fk_data, fk_horario, fk_local) REFERENCES programacao(data, horario, local)
-    );
-
-    CREATE TABLE filmes_avaliacao (
-        id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-        fk_id_filme INT,
-        cinematografia VARCHAR(100),
-        originalidade VARCHAR(100),
-        comentario_tecnico TEXT,
-        
-        FOREIGN KEY (fk_id_filme) REFERENCES filmes(id_filme)
-    );
-
-    */
-
-        String t = txtTitulo.getText();
-        String d = txtDiretor.getText();
-        String dt = txtData.getText();
-        String h = txtHora.getText();
-        String l = txtLocal.getText();
-
+    private void btnEditarIngressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarIngressoActionPerformed
         try {
             appData app = new appData();
-            app.submeterProgramacao(t, d, dt, h, l);
-            JOptionPane.showMessageDialog(null, "Programação submetida com sucesso!");
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao submeter programação: " + e.getMessage());
+            app.editarIngresso(
+                idIngresso,
+                txtTitulo.getText(),
+                txtDiretor.getText(),
+                txtData.getText(),
+                txtHora.getText(),
+                txtLocal.getText(),
+                Integer.parseInt(txtVagas.getText())
+            );
+            JOptionPane.showMessageDialog(null, "Ingresso editado com sucesso!");
+            this.dispose();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao editar ingresso: " + ex.getMessage());
         }
-    
-    }//GEN-LAST:event_btnEnviarActionPerformed
+    }//GEN-LAST:event_btnEditarIngressoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,37 +192,37 @@ public class Programacao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Programacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarIngresso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Programacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarIngresso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Programacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarIngresso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Programacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarIngresso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Programacao().setVisible(true);
+                new editarIngresso(0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnEditarIngresso;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDiretor;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtLocal;
     private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtTitulo1;
+    private javax.swing.JTextField txtVagas;
     // End of variables declaration//GEN-END:variables
 }

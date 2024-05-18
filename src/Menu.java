@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 /**
  *
@@ -27,99 +29,512 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        itmAvaliacao = new javax.swing.JMenuItem();
-        itmListar = new javax.swing.JMenuItem();
-        itmSubmissao = new javax.swing.JMenuItem();
-        itmProgramacao = new javax.swing.JMenuItem();
-        itmIngressos = new javax.swing.JMenuItem();
-        itmEventos = new javax.swing.JMenuItem();
+        mnuAvaliacoes = new javax.swing.JMenu();
+        itmCriarAvaliacao = new javax.swing.JMenuItem();
+        itmListarAvaliacao = new javax.swing.JMenuItem();
+        itmEditarAvaliacao = new javax.swing.JMenuItem();
+        itmExcluirAvaliacao = new javax.swing.JMenuItem();
+        mnuSubmissoes = new javax.swing.JMenu();
+        itmCriarSubmissao = new javax.swing.JMenuItem();
+        itmListarSubmissao = new javax.swing.JMenuItem();
+        itmEditarSubmissao = new javax.swing.JMenuItem();
+        itmExcluirSubmissao = new javax.swing.JMenuItem();
+        mnuProgramacoes = new javax.swing.JMenu();
+        itmCriarProgramacao = new javax.swing.JMenuItem();
+        itmListarProgramacao = new javax.swing.JMenuItem();
+        itmEditarProgramacao = new javax.swing.JMenuItem();
+        itmExcluirProgramacao = new javax.swing.JMenuItem();
+        mnuIngressos = new javax.swing.JMenu();
+        itmCriarIngresso = new javax.swing.JMenuItem();
+        itmListarIngresso = new javax.swing.JMenuItem();
+        itmEditarIngresso = new javax.swing.JMenuItem();
+        itmExcluirIngresso = new javax.swing.JMenuItem();
+        mnuEventos = new javax.swing.JMenu();
+        itmCriarEvento = new javax.swing.JMenuItem();
+        itmListarEvento = new javax.swing.JMenuItem();
+        itmEditarEvento = new javax.swing.JMenuItem();
+        itmExcluirEvento = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jMenu1.setText("MENU");
+        mnuAvaliacoes.setText("Avaliações");
 
-        itmAvaliacao.setText("Avaliação");
-        itmAvaliacao.addActionListener(new java.awt.event.ActionListener() {
+        itmCriarAvaliacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/address-card-solid-v2.png"))); // NOI18N
+        itmCriarAvaliacao.setText("Criar");
+        itmCriarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmAvaliacaoActionPerformed(evt);
+                itmCriarAvaliacaoActionPerformed(evt);
             }
         });
-        jMenu1.add(itmAvaliacao);
+        mnuAvaliacoes.add(itmCriarAvaliacao);
 
-        itmListar.setText("Listar");
-        itmListar.addActionListener(new java.awt.event.ActionListener() {
+        itmListarAvaliacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-solid-v2.png"))); // NOI18N
+        itmListarAvaliacao.setText("Listar");
+        itmListarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmListarActionPerformed(evt);
+                itmListarAvaliacaoActionPerformed(evt);
             }
         });
-        jMenu1.add(itmListar);
+        mnuAvaliacoes.add(itmListarAvaliacao);
 
-        itmSubmissao.setText("Submissão");
-        itmSubmissao.addActionListener(new java.awt.event.ActionListener() {
+        itmEditarAvaliacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen-to-square-solid-v2.png"))); // NOI18N
+        itmEditarAvaliacao.setText("Editar");
+        itmEditarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmSubmissaoActionPerformed(evt);
+                itmEditarAvaliacaoActionPerformed(evt);
             }
         });
-        jMenu1.add(itmSubmissao);
+        mnuAvaliacoes.add(itmEditarAvaliacao);
 
-        itmProgramacao.setText("Programação");
-        itmProgramacao.addActionListener(new java.awt.event.ActionListener() {
+        itmExcluirAvaliacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-solid-v2.png"))); // NOI18N
+        itmExcluirAvaliacao.setText("Excluir");
+        itmExcluirAvaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmProgramacaoActionPerformed(evt);
+                itmExcluirAvaliacaoActionPerformed(evt);
             }
         });
-        jMenu1.add(itmProgramacao);
+        mnuAvaliacoes.add(itmExcluirAvaliacao);
 
-        itmIngressos.setText("Ingressos");
-        itmIngressos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(mnuAvaliacoes);
+
+        mnuSubmissoes.setText("Submissões");
+
+        itmCriarSubmissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/address-card-solid-v2.png"))); // NOI18N
+        itmCriarSubmissao.setText("Criar");
+        itmCriarSubmissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmIngressosActionPerformed(evt);
+                itmCriarSubmissaoActionPerformed(evt);
             }
         });
-        jMenu1.add(itmIngressos);
+        mnuSubmissoes.add(itmCriarSubmissao);
 
-        itmEventos.setText("Eventos");
-        jMenu1.add(itmEventos);
+        itmListarSubmissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-solid-v2.png"))); // NOI18N
+        itmListarSubmissao.setText("Listar");
+        itmListarSubmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarSubmissaoActionPerformed(evt);
+            }
+        });
+        mnuSubmissoes.add(itmListarSubmissao);
 
-        jMenuBar1.add(jMenu1);
+        itmEditarSubmissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen-to-square-solid-v2.png"))); // NOI18N
+        itmEditarSubmissao.setText("Editar");
+        itmEditarSubmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEditarSubmissaoActionPerformed(evt);
+            }
+        });
+        mnuSubmissoes.add(itmEditarSubmissao);
+
+        itmExcluirSubmissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-solid-v2.png"))); // NOI18N
+        itmExcluirSubmissao.setText("Excluir");
+        itmExcluirSubmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmExcluirSubmissaoActionPerformed(evt);
+            }
+        });
+        mnuSubmissoes.add(itmExcluirSubmissao);
+
+        jMenuBar1.add(mnuSubmissoes);
+
+        mnuProgramacoes.setText("Programações");
+
+        itmCriarProgramacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/address-card-solid-v2.png"))); // NOI18N
+        itmCriarProgramacao.setText("Criar");
+        itmCriarProgramacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCriarProgramacaoActionPerformed(evt);
+            }
+        });
+        mnuProgramacoes.add(itmCriarProgramacao);
+
+        itmListarProgramacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-solid-v2.png"))); // NOI18N
+        itmListarProgramacao.setText("Listar");
+        itmListarProgramacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarProgramacaoActionPerformed(evt);
+            }
+        });
+        mnuProgramacoes.add(itmListarProgramacao);
+
+        itmEditarProgramacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen-to-square-solid-v2.png"))); // NOI18N
+        itmEditarProgramacao.setText("Editar");
+        itmEditarProgramacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEditarProgramacaoActionPerformed(evt);
+            }
+        });
+        mnuProgramacoes.add(itmEditarProgramacao);
+
+        itmExcluirProgramacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-solid-v2.png"))); // NOI18N
+        itmExcluirProgramacao.setText("Excluir");
+        itmExcluirProgramacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmExcluirProgramacaoActionPerformed(evt);
+            }
+        });
+        mnuProgramacoes.add(itmExcluirProgramacao);
+
+        jMenuBar1.add(mnuProgramacoes);
+
+        mnuIngressos.setText("Ingressos");
+
+        itmCriarIngresso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/address-card-solid-v2.png"))); // NOI18N
+        itmCriarIngresso.setText("Criar");
+        itmCriarIngresso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCriarIngressoActionPerformed(evt);
+            }
+        });
+        mnuIngressos.add(itmCriarIngresso);
+
+        itmListarIngresso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-solid-v2.png"))); // NOI18N
+        itmListarIngresso.setText("Listar");
+        itmListarIngresso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarIngressoActionPerformed(evt);
+            }
+        });
+        mnuIngressos.add(itmListarIngresso);
+
+        itmEditarIngresso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen-to-square-solid-v2.png"))); // NOI18N
+        itmEditarIngresso.setText("Editar");
+        itmEditarIngresso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEditarIngressoActionPerformed(evt);
+            }
+        });
+        mnuIngressos.add(itmEditarIngresso);
+
+        itmExcluirIngresso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-solid-v2.png"))); // NOI18N
+        itmExcluirIngresso.setText("Excluir");
+        itmExcluirIngresso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmExcluirIngressoActionPerformed(evt);
+            }
+        });
+        mnuIngressos.add(itmExcluirIngresso);
+
+        jMenuBar1.add(mnuIngressos);
+
+        mnuEventos.setText("Eventos");
+
+        itmCriarEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/address-card-solid-v2.png"))); // NOI18N
+        itmCriarEvento.setText("Criar");
+        itmCriarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCriarEventoActionPerformed(evt);
+            }
+        });
+        mnuEventos.add(itmCriarEvento);
+
+        itmListarEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-solid-v2.png"))); // NOI18N
+        itmListarEvento.setText("Listar");
+        itmListarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarEventoActionPerformed(evt);
+            }
+        });
+        mnuEventos.add(itmListarEvento);
+
+        itmEditarEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen-to-square-solid-v2.png"))); // NOI18N
+        itmEditarEvento.setText("Editar");
+        itmEditarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEditarEventoActionPerformed(evt);
+            }
+        });
+        mnuEventos.add(itmEditarEvento);
+
+        itmExcluirEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-solid-v2.png"))); // NOI18N
+        itmExcluirEvento.setText("Excluir");
+        itmExcluirEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmExcluirEventoActionPerformed(evt);
+            }
+        });
+        mnuEventos.add(itmExcluirEvento);
+
+        jMenuBar1.add(mnuEventos);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itmAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAvaliacaoActionPerformed
-        // Solicitar ao usuário que insira o ID do filme
+
+    /*AVALIAÇÃO*/
+    private void itmCriarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCriarAvaliacaoActionPerformed
+        //Solicitar ao usuário que insira o ID do filme
         String idInput = JOptionPane.showInputDialog("Digite o ID do filme que deseja avaliar:");
-        // Verificar se o usuário inseriu algum valor
+        //Verificar se o usuário inseriu algum valor
         if (idInput != null && !idInput.isEmpty()) {
             int idFilme = Integer.parseInt(idInput);
-            // Abrir a tela de avaliação com o ID do filme
-            new Avaliacao(idFilme).setVisible(true);
+            //Abrir a tela de avaliação com o ID do filme
+            new criarAvaliacao(idFilme).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "ID do filme não fornecido.");
         }
-        
-        // new Avaliacao().setVisible(true);
-    }//GEN-LAST:event_itmAvaliacaoActionPerformed
+        // new criarAvaliacao().setVisible(true);
+    }//GEN-LAST:event_itmCriarAvaliacaoActionPerformed
 
-    private void itmListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarActionPerformed
-        new Listar().setVisible(true);
-    }//GEN-LAST:event_itmListarActionPerformed
+    private void itmListarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAvaliacaoActionPerformed
+        new listarAvaliacoes().setVisible(true);
+    }//GEN-LAST:event_itmListarAvaliacaoActionPerformed
 
-    private void itmSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmSubmissaoActionPerformed
-        new Submissao().setVisible(true);
-    }//GEN-LAST:event_itmSubmissaoActionPerformed
+    private void itmEditarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEditarAvaliacaoActionPerformed
+        // Solicitar ao usuário que insira o ID da avaliação
+        String idInput = JOptionPane.showInputDialog("Digite o ID da avaliação que deseja editar:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+        try {
+            int idAvaliacao = Integer.parseInt(idInput);
+            // Abrir a tela de edição com o ID da avaliação
+            new editarAvaliacao(idAvaliacao).setVisible(true);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ID da avaliação inválido.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "ID da avaliação não fornecido.");
+    }
+        // new editarAvaliacao().setVisible(true);
+    }//GEN-LAST:event_itmEditarAvaliacaoActionPerformed
 
-    private void itmProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProgramacaoActionPerformed
-        new Programacao().setVisible(true);
-    }//GEN-LAST:event_itmProgramacaoActionPerformed
+    private void itmExcluirAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirAvaliacaoActionPerformed
+        //Solicitar ao usuário que insira o ID da avaliação
+        int id;
+        String idInput = JOptionPane.showInputDialog("Digite o ID da avaliação que deseja excluir:");
+        if (idInput != null && !idInput.isEmpty()) {
+            id = Integer.parseInt(idInput);
+            try {
+                new appData().excluirAvaliacao(id);
+                //Avisar o usuário se os dados foram excluídos
+                JOptionPane.showMessageDialog(null, "Avaliação excluída com sucesso");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID da avaliação não fornecido.");
+        }
+        // new excluirAvaliacao().setVisible(true);
+    }//GEN-LAST:event_itmExcluirAvaliacaoActionPerformed
 
-    private void itmIngressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIngressosActionPerformed
-        new Ingressos().setVisible(true);
-    }//GEN-LAST:event_itmIngressosActionPerformed
+
+    /*SUBMISSÃO*/
+    private void itmCriarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCriarSubmissaoActionPerformed
+        new criarSubmissao().setVisible(true);
+    }//GEN-LAST:event_itmCriarSubmissaoActionPerformed
+
+    private void itmListarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarSubmissaoActionPerformed
+        new listarSubmissao().setVisible(true);
+    }//GEN-LAST:event_itmListarSubmissaoActionPerformed
+
+    private void itmEditarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEditarSubmissaoActionPerformed
+        //Solicitar ao usuário que insira o ID da submissão
+        String idInput = JOptionPane.showInputDialog("Digite o ID da submissão que deseja editar:");
+        //Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            int idSubmissao = Integer.parseInt(idInput);
+            //Abrir a tela de edição com o ID da submissão
+            new editarSubmissao(idSubmissao).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "ID da submissão não fornecido.");
+        }
+    }//GEN-LAST:event_itmEditarSubmissaoActionPerformed
+
+    private void itmExcluirSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirSubmissaoActionPerformed
+        //Solicitar ao usuário que insira o ID da submissão
+        int id;
+        String idInput = JOptionPane.showInputDialog("Digite o ID da submissão que deseja excluir:");
+        if (idInput != null && !idInput.isEmpty()) {
+            id = Integer.parseInt(idInput);
+            try {
+                new appData().excluirSubmissao(id);
+                //Avisar o usuário se os dados foram excluídos
+                JOptionPane.showMessageDialog(null, "Submissão excluída com sucesso");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID da submissão não fornecido.");
+        }
+        // new excluirSubmissao().setVisible(true);
+    }//GEN-LAST:event_itmExcluirSubmissaoActionPerformed
+
+
+    /*PROGRAMAÇÃO*/
+    private void itmCriarProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCriarProgramacaoActionPerformed
+        // Solicitar ao usuário que insira o ID do filme para criar a Programação
+        String idInput = JOptionPane.showInputDialog("Digite o ID do filme que deseja criar a programação:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            try {
+                int idFilme = Integer.parseInt(idInput);
+                // Abrir a tela de programação com o ID do filme
+                new criarProgramacao(idFilme).setVisible(true);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "ID do filme inválido.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do filme não fornecido.");
+        }
+        // new criarProgramacao().setVisible(true);
+    }//GEN-LAST:event_itmCriarProgramacaoActionPerformed
+
+    private void itmListarProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarProgramacaoActionPerformed
+        new listarProgramacao().setVisible(true);
+    }//GEN-LAST:event_itmListarProgramacaoActionPerformed
+
+    private void itmEditarProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEditarProgramacaoActionPerformed
+        String idInput = JOptionPane.showInputDialog("Digite o ID da programação que deseja editar:");
+    if (idInput != null && !idInput.isEmpty()) {
+        try {
+            int idProgramacao = Integer.parseInt(idInput);
+            new editarProgramacao(idProgramacao).setVisible(true);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ID da programação inválido.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "ID da programação não fornecido.");
+    }
+        // new editarProgramacao().setVisible(true);
+    }//GEN-LAST:event_itmEditarProgramacaoActionPerformed
+
+    private void itmExcluirProgramacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirProgramacaoActionPerformed
+        //Solicitar ao usuário que insira o ID da programação
+        int id;
+        String idInput = JOptionPane.showInputDialog("Digite o ID da programação que deseja excluir:");
+        if (idInput != null && !idInput.isEmpty()) {
+            id = Integer.parseInt(idInput);
+            try {
+                new appData().excluirProgramacao(id);
+                //Avisar o usuário se os dados foram excluídos
+                JOptionPane.showMessageDialog(null, "Programação excluída com sucesso");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID da programação não fornecido.");
+        }
+        // new excluirProgramacao().setVisible(true);
+    }//GEN-LAST:event_itmExcluirProgramacaoActionPerformed
+
+
+    /*INGRESSOS*/
+    private void itmCriarIngressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCriarIngressoActionPerformed
+        // Solicitar ao usuário que insira o ID do filme
+        String idInput = JOptionPane.showInputDialog("Digite o ID do filme que deseja criar o ingresso:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            try {
+                int idFilme = Integer.parseInt(idInput);
+                // Abrir a tela de criação de ingresso com o ID do filme
+                new criarIngresso(idFilme).setVisible(true);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "ID do filme inválido.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do filme não fornecido.");
+        }
+        // new criarIngresso().setVisible(true);
+    }//GEN-LAST:event_itmCriarIngressoActionPerformed
+
+    private void itmListarIngressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarIngressoActionPerformed
+        new listarIngressos().setVisible(true);
+    }//GEN-LAST:event_itmListarIngressoActionPerformed
+
+    private void itmEditarIngressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEditarIngressoActionPerformed
+        // Solicitar ao usuário que insira o ID do ingresso
+        String idInput = JOptionPane.showInputDialog("Digite o ID do ingresso que deseja editar:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            try {
+                int idIngresso = Integer.parseInt(idInput);
+                new editarIngresso(idIngresso).setVisible(true);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "ID do ingresso inválido.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do ingresso não fornecido.");
+        }
+        // new editarIngresso().setVisible(true);
+    }//GEN-LAST:event_itmEditarIngressoActionPerformed
+
+    private void itmExcluirIngressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirIngressoActionPerformed
+        //Solicitar ao usuário que insira o ID do ingresso
+        int id;
+        String idInput = JOptionPane.showInputDialog("Digite o ID do ingresso que deseja excluir:");
+        if (idInput != null && !idInput.isEmpty()) {
+            id = Integer.parseInt(idInput);
+            try {
+                new appData().excluirIngresso(id);
+                //Avisar o usuário se os dados foram excluídos
+                JOptionPane.showMessageDialog(null, "Ingresso excluído com sucesso");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do ingresso não fornecido.");
+        }
+        // new excluirIngresso().setVisible(true);
+    }//GEN-LAST:event_itmExcluirIngressoActionPerformed
+
+
+    /*EVENTOS*/
+    private void itmCriarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCriarEventoActionPerformed
+        new criarEvento().setVisible(true);
+    }//GEN-LAST:event_itmCriarEventoActionPerformed
+
+    private void itmListarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarEventoActionPerformed
+        new listarEventos().setVisible(true);
+    }//GEN-LAST:event_itmListarEventoActionPerformed
+
+    private void itmEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEditarEventoActionPerformed
+        // Solicitar ao usuário que insira o ID do evento
+        String idInput = JOptionPane.showInputDialog("Digite o ID do evento que deseja editar:");
+        // Verificar se o usuário inseriu algum valor
+        if (idInput != null && !idInput.isEmpty()) {
+            try {
+                int idEvento = Integer.parseInt(idInput);
+                new editarEvento(idEvento).setVisible(true);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "ID do evento inválido.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do evento não fornecido.");
+        }
+        // new editarEvento().setVisible(true);
+    }//GEN-LAST:event_itmEditarEventoActionPerformed
+
+    private void itmExcluirEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirEventoActionPerformed
+        //Solicitar ao usuário que insira o ID do evento
+        int id;
+        String idInput = JOptionPane.showInputDialog("Digite o ID do evento que deseja excluir:");
+        if (idInput != null && !idInput.isEmpty()) {
+            id = Integer.parseInt(idInput);
+            try {
+                new appData().excluirEvento(id);
+                //Avisar o usuário se os dados foram excluídos
+                JOptionPane.showMessageDialog(null, "Evento excluído com sucesso");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar localizar o Driver JDBC");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o Banco de dados:" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ID do evento não fornecido.");
+        }
+        // new excluirEvento().setVisible(true);
+    }//GEN-LAST:event_itmExcluirEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,13 +572,31 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem itmAvaliacao;
-    private javax.swing.JMenuItem itmEventos;
-    private javax.swing.JMenuItem itmIngressos;
-    private javax.swing.JMenuItem itmListar;
-    private javax.swing.JMenuItem itmProgramacao;
-    private javax.swing.JMenuItem itmSubmissao;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem itmCriarAvaliacao;
+    private javax.swing.JMenuItem itmCriarEvento;
+    private javax.swing.JMenuItem itmCriarIngresso;
+    private javax.swing.JMenuItem itmCriarProgramacao;
+    private javax.swing.JMenuItem itmCriarSubmissao;
+    private javax.swing.JMenuItem itmEditarAvaliacao;
+    private javax.swing.JMenuItem itmEditarEvento;
+    private javax.swing.JMenuItem itmEditarIngresso;
+    private javax.swing.JMenuItem itmEditarProgramacao;
+    private javax.swing.JMenuItem itmEditarSubmissao;
+    private javax.swing.JMenuItem itmExcluirAvaliacao;
+    private javax.swing.JMenuItem itmExcluirEvento;
+    private javax.swing.JMenuItem itmExcluirIngresso;
+    private javax.swing.JMenuItem itmExcluirProgramacao;
+    private javax.swing.JMenuItem itmExcluirSubmissao;
+    private javax.swing.JMenuItem itmListarAvaliacao;
+    private javax.swing.JMenuItem itmListarEvento;
+    private javax.swing.JMenuItem itmListarIngresso;
+    private javax.swing.JMenuItem itmListarProgramacao;
+    private javax.swing.JMenuItem itmListarSubmissao;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mnuAvaliacoes;
+    private javax.swing.JMenu mnuEventos;
+    private javax.swing.JMenu mnuIngressos;
+    private javax.swing.JMenu mnuProgramacoes;
+    private javax.swing.JMenu mnuSubmissoes;
     // End of variables declaration//GEN-END:variables
 }

@@ -74,6 +74,8 @@ public class Cadastrar extends javax.swing.JFrame {
             //limpar os campos
             txtEmail.setText("");
             txtSenha.setText("");
+            //fechar a janela
+            this.dispose();
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao tentar localizar o Driver JDBC");
         } catch (SQLException ex) {
