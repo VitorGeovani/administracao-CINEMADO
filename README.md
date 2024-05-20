@@ -80,16 +80,9 @@
  </tr>
 </table>
 
+## <a name="ComoContribuirParaOProjeto"></a>Banco de Dados :memo:
 
-
-<div align="center">
-  <sub><b>© 2024 Cinemado - Administração</b></sub>
-</div>
-
-
-
-Banco de dados:
-
+```
 create table usuarios(
 id_usuario int auto_increment primary key,
 email varchar(100),
@@ -155,3 +148,9 @@ CREATE TABLE filmes_avaliacao (
     
     FOREIGN KEY (fk_id_filme) REFERENCES filmes(id_filme)
 );
+
+```
+    
+<div align="center">
+  <sub><b>© 2024 Cinemado - Administração</b></sub>
+</div>
