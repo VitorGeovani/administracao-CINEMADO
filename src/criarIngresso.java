@@ -74,6 +74,7 @@ public class criarIngresso extends javax.swing.JFrame {
         btnCriarIngresso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Criar Ingresso");
         getContentPane().setLayout(null);
 
         jLabel2.setText("Título do Filme:");

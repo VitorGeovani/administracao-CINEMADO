@@ -37,10 +37,6 @@ public class listarAvaliacoes extends javax.swing.JFrame {
                     resultado.getString("titulo"),
                     resultado.getString("genero"),
                     resultado.getString("diretor"),
-                    resultado.getString("duracao"), 
-                    resultado.getString("sinopse"), 
-                    resultado.getString("data_lancamento"), 
-                    resultado.getString("classificacao_indicativa"),
                     resultado.getString("cinematografia"), 
                     resultado.getString("originalidade"), 
                     resultado.getString("comentario_tecnico")
@@ -98,11 +94,11 @@ public class listarAvaliacoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID do filme", "Título", "Gênero", "Diretor"
+                "ID do filme", "Título", "Gênero", "Diretor", "Cinematografia", "Originalidade", "Comentário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -114,7 +110,7 @@ public class listarAvaliacoes extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 120, 820, 330);
 
-        setSize(new java.awt.Dimension(866, 537));
+        setSize(new java.awt.Dimension(1141, 537));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

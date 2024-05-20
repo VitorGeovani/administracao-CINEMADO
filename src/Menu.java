@@ -28,6 +28,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuAvaliacoes = new javax.swing.JMenu();
         itmCriarAvaliacao = new javax.swing.JMenuItem();
@@ -56,7 +57,12 @@ public class Menu extends javax.swing.JFrame {
         itmExcluirEvento = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menu de Administração");
         getContentPane().setLayout(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo-cinemado-administracao.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(70, 30, 430, 310);
 
         mnuAvaliacoes.setText("Avaliações");
 
@@ -260,7 +266,8 @@ public class Menu extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(558, 410));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -592,6 +599,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmListarIngresso;
     private javax.swing.JMenuItem itmListarProgramacao;
     private javax.swing.JMenuItem itmListarSubmissao;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mnuAvaliacoes;
     private javax.swing.JMenu mnuEventos;

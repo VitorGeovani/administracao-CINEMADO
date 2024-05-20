@@ -65,6 +65,7 @@ public class editarIngresso extends javax.swing.JFrame {
         btnEditarIngresso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Ingresso");
         getContentPane().setLayout(null);
 
         jLabel2.setText("Título do Filme:");

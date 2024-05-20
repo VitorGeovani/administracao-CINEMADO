@@ -37,25 +37,26 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
         btnEntrar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
-        setTitle("Login");
+        setTitle("Login - Cinemado");
         getContentPane().setLayout(null);
 
         jLabel1.setText("Senha:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 110, 90, 30);
+        jLabel1.setBounds(40, 140, 90, 30);
 
         jLabel2.setText("Email:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 70, 90, 30);
+        jLabel2.setBounds(40, 100, 90, 30);
         getContentPane().add(txtEmail);
-        txtEmail.setBounds(90, 70, 300, 30);
+        txtEmail.setBounds(90, 100, 300, 30);
         getContentPane().add(pswSenha);
-        pswSenha.setBounds(90, 110, 300, 30);
+        pswSenha.setBounds(90, 140, 300, 30);
 
         jLabel3.setText("Não possui conta? ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 240, 130, 40);
+        jLabel3.setBounds(40, 270, 130, 40);
 
         btnCadastrar.setText("Cadastre-se");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +65,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCadastrar);
-        btnCadastrar.setBounds(150, 250, 140, 23);
+        btnCadastrar.setBounds(150, 280, 140, 23);
 
         btnEntrar.setText("ENTRAR");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +74,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(160, 170, 130, 30);
+        btnEntrar.setBounds(160, 200, 130, 30);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo-cinemado-administracao-v2.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(170, 0, 100, 90);
 
         setSize(new java.awt.Dimension(450, 344));
         setLocationRelativeTo(null);
@@ -143,6 +148,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField pswSenha;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
