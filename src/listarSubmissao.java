@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class listarSubmissao extends javax.swing.JFrame {
 
-    
     appData data;
+
     /**
      * Creates new form listarSubmissao
      */
@@ -26,21 +26,25 @@ public class listarSubmissao extends javax.swing.JFrame {
         carregarDados("Todos");
     }
 
-    public void carregarDados(String genero){
+    public void carregarDados(String genero) {
         try {
             DefaultTableModel model = (DefaultTableModel) tblSubmissoes.getModel();
             model.setRowCount(0);
             ResultSet resultado = data.listarFilmes(genero);
             while (resultado.next()) {
                 model.addRow(new Object[]{
-                    resultado.getInt("id_filme"), 
-                    resultado.getString("titulo"), 
-                    resultado.getString("genero"), 
-                    resultado.getString("diretor")
+                    resultado.getInt("id_filme"),
+                    resultado.getString("titulo"),
+                    resultado.getString("diretor"),
+                    resultado.getString("duracao"),
+                    resultado.getString("genero"),
+                    resultado.getString("sinopse"),
+                    resultado.getString("data_lancamento"),
+                    resultado.getString("classificacao_indicativa")
                 });
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao buscar filmes: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar filmes: " + ex.getMessage());
         }
     }
 
@@ -90,11 +94,11 @@ public class listarSubmissao extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID do filme", "Título", "Gênero", "Diretor"
+                "ID do filme", "Título", "Diretor", "Duração", "Gênero", "Sinopse", "Lançamento", "Classificação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -106,19 +110,19 @@ public class listarSubmissao extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 110, 740, 330);
 
-        setSize(new java.awt.Dimension(821, 504));
+        setSize(new java.awt.Dimension(783, 504));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
-        String genero = cmbGenero.getSelectedItem().toString();
-        carregarDados(genero);
-    }//GEN-LAST:event_cmbGeneroActionPerformed
+     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
+         String genero = cmbGenero.getSelectedItem().toString();
+         carregarDados(genero);
+     }//GEN-LAST:event_cmbGeneroActionPerformed
 
-    private void btnListarSubmissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarSubmissoesActionPerformed
-        String genero = cmbGenero.getSelectedItem().toString();
-        carregarDados(genero);
-    }//GEN-LAST:event_btnListarSubmissoesActionPerformed
+     private void btnListarSubmissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarSubmissoesActionPerformed
+         String genero = cmbGenero.getSelectedItem().toString();
+         carregarDados(genero);
+     }//GEN-LAST:event_btnListarSubmissoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,7 +131,7 @@ public class listarSubmissao extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

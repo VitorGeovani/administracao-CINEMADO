@@ -110,7 +110,7 @@ public class listarAvaliacoes extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 120, 820, 330);
 
-        setSize(new java.awt.Dimension(1141, 537));
+        setSize(new java.awt.Dimension(865, 537));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
