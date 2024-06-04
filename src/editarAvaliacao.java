@@ -34,6 +34,14 @@ public class editarAvaliacao extends javax.swing.JFrame {
                 txtDuracao.setText(rs.getString("duracao"));
                 txtData.setText(rs.getString("data_lancamento"));
                 cnbClassificacao.setSelectedItem(rs.getString("classificacao_indicativa"));
+                // Desabilitar edição dos campos que não devem ser editados
+                txtTitulo.setEnabled(false);
+                txtDiretor.setEnabled(false);
+                cnbGenero.setEnabled(false);
+                txtDuracao.setEnabled(false);
+                txtData.setEnabled(false);
+                cnbClassificacao.setEnabled(false);
+                // Permitir a edição dos campos desejados
                 txtCinematografia.setText(rs.getString("cinematografia"));
                 txtOriginalidade.setText(rs.getString("originalidade"));
                 txtComentario.setText(rs.getString("comentario_tecnico"));
