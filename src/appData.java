@@ -22,7 +22,7 @@ public class appData {
     private void conectar() throws ClassNotFoundException, SQLException{
         // conecção com BD
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema_pi","root","p@$$w0rd");
+        conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema_pi","root","p@$$w0rd");
         
     }
     public void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
@@ -222,7 +222,7 @@ public class appData {
     // Método para buscar Programação dentro da Edição
     public ResultSet buscarProgramacoesEditar(int idPrograma) throws ClassNotFoundException, SQLException {
         conectar();
-        st = conectar.prepareStatement("SELECT fk_titulo, fk_diretor FROM programacao WHERE id_programa = ?");
+        st = conectar.prepareStatement("SELECT fk_titulo, fk_diretor, data, horario, local FROM programacao WHERE id_programa = ?");
         st.setInt(1, idPrograma);
         return st.executeQuery();
     }

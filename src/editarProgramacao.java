@@ -21,6 +21,13 @@ public class editarProgramacao extends javax.swing.JFrame {
             if (rs.next()) {
                 txtTitulo.setText(rs.getString("fk_titulo"));
                 txtDiretor2.setText(rs.getString("fk_diretor"));
+                txtData.setText(rs.getString("data"));
+                txtHora.setText(rs.getString("horario"));
+                txtLocal.setText(rs.getString("local"));
+
+                //Desabilitar a edição
+                // txtTitulo.setEnabled(false);
+                // txtDiretor2.setEnabled(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar dados da programação: " + e.getMessage());

@@ -29,12 +29,20 @@ public class editarIngresso extends javax.swing.JFrame {
             appData app = new appData();
             ResultSet resultado = app.buscarIngresso(idIngresso);
             if (resultado.next()) {
+                // Preencher os campos com os dados do ingresso
                 txtTitulo.setText(resultado.getString("titulo"));
                 txtDiretor.setText(resultado.getString("diretor"));
                 txtData.setText(resultado.getString("fk_data"));
                 txtHora.setText(resultado.getString("fk_horario"));
                 txtLocal.setText(resultado.getString("fk_local"));
                 txtVagas.setText(resultado.getString("vagas"));
+
+                // Desabilitar edição dos campos que não devem ser editados
+                txtTitulo.setEnabled(false);
+                txtDiretor.setEnabled(false);
+                txtData.setEnabled(false);
+                txtHora.setEnabled(false);
+                txtLocal.setEnabled(false);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar ingresso: " + ex.getMessage());
